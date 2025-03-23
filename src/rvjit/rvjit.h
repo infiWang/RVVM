@@ -57,6 +57,17 @@ file, You can obtain one at https://mozilla.org/MPL/2.0/.
     #define RVJIT_ABI_SYSV 1
     #define RVJIT_NATIVE_LINKER 1
     #define RVJIT_RISCV 1
+#elif defined(__loongarch__)
+    #if __loongarch_grlen == 64
+        #define RVJIT_NATIVE_64BIT 1
+    #elif __loongarch_grlen == 32
+        #error No JIT support for LoongArch32!
+    #else
+        #error No JIT support for Unknown LoongArch Machine!
+    #endif
+    #define RVJIT_ABI_SYSV 1
+    #define RVJIT_NATIVE_LINKER 1
+    #define RVJIT_LOONG64 1
 #elif defined(__aarch64__) || defined(_M_ARM64)
     #define RVJIT_NATIVE_64BIT 1
     #define RVJIT_ABI_SYSV 1

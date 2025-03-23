@@ -144,7 +144,8 @@ override tolower = $(subst A,a,$(subst B,b,$(subst C,c,$(subst D,d,$(subst E,e,$
 # aarch64 -> arm64
 # x86 -> i386
 # x86_64 -> i386 (If -m32 is used)
-override canonize_arch = $(patsubst x86_64,$(if $(filter -m32,$(CFLAGS)),i386,x86_64),$(patsubst amd64,x86_64,$(patsubst aarch64,arm64,$(patsubst x64,x86_64,$(patsubst x86,i386,$1)))))
+# loongarch64 -> loong64
+override canonize_arch = $(patsubst loongarch64,loong64,$(patsubst x86_64,$(if $(filter -m32,$(CFLAGS)),i386,x86_64),$(patsubst amd64,x86_64,$(patsubst aarch64,arm64,$(patsubst x64,x86_64,$(patsubst x86,i386,$1))))))
 
 # Use canonic architecture naming
 override ARCH := $(call canonize_arch,$(ARCH))
@@ -384,7 +385,7 @@ endif
 
 # Check if RVJIT supports the target architecture
 ifeq ($(USE_JIT),1)
-ifeq (,$(findstring 86,$(ARCH))$(findstring arm,$(ARCH))$(findstring riscv,$(ARCH)))
+ifeq (,$(findstring 86,$(ARCH))$(findstring arm,$(ARCH))$(findstring riscv,$(ARCH))$(findstring loong64,$(ARCH)))
 override USE_JIT := 0
 $(info $(INFO_PREFIX) No RVJIT support for current target$(RESET))
 endif
