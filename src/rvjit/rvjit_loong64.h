@@ -1289,76 +1289,76 @@ static inline void rvjit32_native_sll(rvjit_block_t *block, regid_t hrds, regid_
     rvjit_loong_DJK_op(block, LOONGI_SLL_W, hrds, hrs1, hrs2);
 }
 
-static inline void rvjit32_native_addi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit32_native_addi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, hrds, hrs1, imm);
+    rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, hrds, hrs1, simm);
 }
 
-static inline void rvjit32_native_ori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit32_native_ori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    if (checku11(imm))
-        rvjit_loong_DJUk12_op(block, LOONGI_ORI, hrds, hrs1, imm);
+    if (checku11(simm))
+        rvjit_loong_DJUk12_op(block, LOONGI_ORI, hrds, hrs1, simm);
     else {
         rvjit_loong_TdJ_op(block, LOONGI_MOVGR2SCR, LOONG_REG_SCR3, LOONG_REG_GSCR);
         
-        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, imm);
+        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, simm);
         rvjit_loong_DJK_op(block, LOONGI_OR, hrds, hrs1, LOONG_REG_GSCR);
         
         rvjit_loong_DTj_op(block, LOONGI_MOVSCR2GR, LOONG_REG_GSCR, LOONG_REG_SCR3);
     }
 }
 
-static inline void rvjit32_native_andi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit32_native_andi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    if (checku11(imm))
-        rvjit_loong_DJUk12_op(block, LOONGI_ANDI, hrds, hrs1, imm);
+    if (checku11(simm))
+        rvjit_loong_DJUk12_op(block, LOONGI_ANDI, hrds, hrs1, simm);
     else {
         rvjit_loong_TdJ_op(block, LOONGI_MOVGR2SCR, LOONG_REG_SCR3, LOONG_REG_GSCR);
         
-        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, imm);
+        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, simm);
         rvjit_loong_DJK_op(block, LOONGI_AND, hrds, hrs1, LOONG_REG_GSCR);
         
         rvjit_loong_DTj_op(block, LOONGI_MOVSCR2GR, LOONG_REG_GSCR, LOONG_REG_SCR3);
     }
 }
 
-static inline void rvjit32_native_xori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit32_native_xori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    if (checku11(imm))
-        rvjit_loong_DJUk12_op(block, LOONGI_XORI, hrds, hrs1, imm);
+    if (checku11(simm))
+        rvjit_loong_DJUk12_op(block, LOONGI_XORI, hrds, hrs1, simm);
     else {
         rvjit_loong_TdJ_op(block, LOONGI_MOVGR2SCR, LOONG_REG_SCR3, LOONG_REG_GSCR);
         
-        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, imm);
+        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, simm);
         rvjit_loong_DJK_op(block, LOONGI_XOR, hrds, hrs1, LOONG_REG_GSCR);
         
         rvjit_loong_DTj_op(block, LOONGI_MOVSCR2GR, LOONG_REG_GSCR, LOONG_REG_SCR3);
     }
 }
 
-static inline void rvjit32_native_srai(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
+static inline void rvjit32_native_srai(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t uimm)
 {
-    rvjit_loong_DJUk5_op(block, LOONGI_SRAI_W, hrds, hrs1, imm);
+    rvjit_loong_DJUk5_op(block, LOONGI_SRAI_W, hrds, hrs1, uimm);
 }
 
-static inline void rvjit32_native_srli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
+static inline void rvjit32_native_srli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t uimm)
 {
-    rvjit_loong_DJUk5_op(block, LOONGI_SRLI_W, hrds, hrs1, imm);
+    rvjit_loong_DJUk5_op(block, LOONGI_SRLI_W, hrds, hrs1, uimm);
 }
 
-static inline void rvjit32_native_slli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
+static inline void rvjit32_native_slli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t uimm)
 {
-    rvjit_loong_DJUk5_op(block, LOONGI_SLLI_W, hrds, hrs1, imm);
+    rvjit_loong_DJUk5_op(block, LOONGI_SLLI_W, hrds, hrs1, uimm);
 }
 
-static inline void rvjit32_native_slti(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit32_native_slti(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    rvjit_loong_DJSk12_op(block, LOONGI_SLTI, hrds, hrs1, imm);
+    rvjit_loong_DJSk12_op(block, LOONGI_SLTI, hrds, hrs1, simm);
 }
 
-static inline void rvjit32_native_sltiu(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit32_native_sltiu(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t uimm)
 {
-    rvjit_loong_DJSk12_op(block, LOONGI_SLTUI, hrds, hrs1, imm);
+    rvjit_loong_DJSk12_op(block, LOONGI_SLTUI, hrds, hrs1, uimm);
 }
 
 static inline void rvjit32_native_slt(rvjit_block_t *block, regid_t hrds, regid_t hrs1, regid_t hrs2)
@@ -1637,96 +1637,96 @@ static inline void rvjit64_native_sllw(rvjit_block_t *block, regid_t hrds, regid
     rvjit_loong_DJK_op(block, LOONGI_SLL_W, hrds, hrs1, hrs2);
 }
 
-static inline void rvjit64_native_addi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit64_native_addi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    rvjit_loong_DJSk12_op(block, LOONGI_ADDI_D, hrds, hrs1, imm);
+    rvjit_loong_DJSk12_op(block, LOONGI_ADDI_D, hrds, hrs1, simm);
 }
 
-static inline void rvjit64_native_addiw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit64_native_addiw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, hrds, hrs1, imm);
+    rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, hrds, hrs1, simm);
 }
 
-static inline void rvjit64_native_ori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit64_native_ori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    if (checku11(imm))
-        rvjit_loong_DJUk12_op(block, LOONGI_ORI, hrds, hrs1, imm);
+    if (checku11(simm))
+        rvjit_loong_DJUk12_op(block, LOONGI_ORI, hrds, hrs1, simm);
     else {
         rvjit_loong_TdJ_op(block, LOONGI_MOVGR2SCR, LOONG_REG_SCR3, LOONG_REG_GSCR);
         
-        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, imm);
+        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, simm);
         rvjit_loong_DJK_op(block, LOONGI_OR, hrds, hrs1, LOONG_REG_GSCR);
         
         rvjit_loong_DTj_op(block, LOONGI_MOVSCR2GR, LOONG_REG_GSCR, LOONG_REG_SCR3);
     }
 }
 
-static inline void rvjit64_native_andi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit64_native_andi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    if (checku11(imm))
-        rvjit_loong_DJUk12_op(block, LOONGI_ANDI, hrds, hrs1, imm);
+    if (checku11(simm))
+        rvjit_loong_DJUk12_op(block, LOONGI_ANDI, hrds, hrs1, simm);
     else {
         rvjit_loong_TdJ_op(block, LOONGI_MOVGR2SCR, LOONG_REG_SCR3, LOONG_REG_GSCR);
 
-        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, imm);
+        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, simm);
         rvjit_loong_DJK_op(block, LOONGI_AND, hrds, hrs1, LOONG_REG_GSCR);
 
         rvjit_loong_DTj_op(block, LOONGI_MOVSCR2GR, LOONG_REG_GSCR, LOONG_REG_SCR3);
     }
 }
 
-static inline void rvjit64_native_xori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit64_native_xori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    if (checku11(imm))
-        rvjit_loong_DJUk12_op(block, LOONGI_XORI, hrds, hrs1, imm);
+    if (checku11(simm))
+        rvjit_loong_DJUk12_op(block, LOONGI_XORI, hrds, hrs1, simm);
     else {
         rvjit_loong_TdJ_op(block, LOONGI_MOVGR2SCR, LOONG_REG_SCR3, LOONG_REG_GSCR);
 
-        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, imm);
+        rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, LOONG_REG_GSCR, LOONG_REG_ZERO, simm);
         rvjit_loong_DJK_op(block, LOONGI_XOR, hrds, hrs1, LOONG_REG_GSCR);
 
         rvjit_loong_DTj_op(block, LOONGI_MOVSCR2GR, LOONG_REG_GSCR, LOONG_REG_SCR3);
     }
 }
 
-static inline void rvjit64_native_srli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
+static inline void rvjit64_native_srli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t uimm)
 {
-    rvjit_loong_DJUk6_op(block, LOONGI_SRLI_D, hrds, hrs1, imm);
+    rvjit_loong_DJUk6_op(block, LOONGI_SRLI_D, hrds, hrs1, uimm);
 }
 
-static inline void rvjit64_native_srliw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
+static inline void rvjit64_native_srliw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t uimm)
 {
-    rvjit_loong_DJUk5_op(block, LOONGI_SRLI_W, hrds, hrs1, imm);
+    rvjit_loong_DJUk5_op(block, LOONGI_SRLI_W, hrds, hrs1, uimm);
 }
 
-static inline void rvjit64_native_srai(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
+static inline void rvjit64_native_srai(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t uimm)
 {
-    rvjit_loong_DJUk6_op(block, LOONGI_SRAI_D, hrds, hrs1, imm);
+    rvjit_loong_DJUk6_op(block, LOONGI_SRAI_D, hrds, hrs1, uimm);
 }
 
-static inline void rvjit64_native_sraiw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
+static inline void rvjit64_native_sraiw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t uimm)
 {
-    rvjit_loong_DJUk5_op(block, LOONGI_SRAI_W, hrds, hrs1, imm);
+    rvjit_loong_DJUk5_op(block, LOONGI_SRAI_W, hrds, hrs1, uimm);
 }
 
-static inline void rvjit64_native_slli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
+static inline void rvjit64_native_slli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t uimm)
 {
-    rvjit_loong_DJUk6_op(block, LOONGI_SLLI_D, hrds, hrs1, imm);
+    rvjit_loong_DJUk6_op(block, LOONGI_SLLI_D, hrds, hrs1, uimm);
 }
 
-static inline void rvjit64_native_slliw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
+static inline void rvjit64_native_slliw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t uimm)
 {
-    rvjit_loong_DJUk5_op(block, LOONGI_SLLI_W, hrds, hrs1, imm);
+    rvjit_loong_DJUk5_op(block, LOONGI_SLLI_W, hrds, hrs1, uimm);
 }
 
-static inline void rvjit64_native_slti(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit64_native_slti(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t simm)
 {
-    rvjit_loong_DJSk12_op(block, LOONGI_SLTI, hrds, hrs1, imm);
+    rvjit_loong_DJSk12_op(block, LOONGI_SLTI, hrds, hrs1, simm);
 }
 
-static inline void rvjit64_native_sltiu(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit64_native_sltiu(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t uimm)
 {
-    rvjit_loong_DJSk12_op(block, LOONGI_SLTUI, hrds, hrs1, imm);
+    rvjit_loong_DJSk12_op(block, LOONGI_SLTUI, hrds, hrs1, uimm);
 }
 
 static inline void rvjit64_native_slt(rvjit_block_t *block, regid_t hrds, regid_t hrs1, regid_t hrs2)
