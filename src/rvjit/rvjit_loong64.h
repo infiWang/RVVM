@@ -1294,7 +1294,7 @@ static inline void rvjit32_native_addi(rvjit_block_t *block, regid_t hrds, regid
     rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, hrds, hrs1, imm);
 }
 
-static inline void rvjit32_native_ori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint32_t imm)
+static inline void rvjit32_native_ori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     if (checku11(imm))
         rvjit_loong_DJUk12_op(block, LOONGI_ORI, hrds, hrs1, imm);
@@ -1308,7 +1308,7 @@ static inline void rvjit32_native_ori(rvjit_block_t *block, regid_t hrds, regid_
     }
 }
 
-static inline void rvjit32_native_andi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint32_t imm)
+static inline void rvjit32_native_andi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     if (checku11(imm))
         rvjit_loong_DJUk12_op(block, LOONGI_ANDI, hrds, hrs1, imm);
@@ -1322,7 +1322,7 @@ static inline void rvjit32_native_andi(rvjit_block_t *block, regid_t hrds, regid
     }
 }
 
-static inline void rvjit32_native_xori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint32_t imm)
+static inline void rvjit32_native_xori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     if (checku11(imm))
         rvjit_loong_DJUk12_op(block, LOONGI_XORI, hrds, hrs1, imm);
@@ -1336,17 +1336,17 @@ static inline void rvjit32_native_xori(rvjit_block_t *block, regid_t hrds, regid
     }
 }
 
-static inline void rvjit32_native_srai(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit32_native_srai(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
 {
     rvjit_loong_DJUk5_op(block, LOONGI_SRAI_W, hrds, hrs1, imm);
 }
 
-static inline void rvjit32_native_srli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit32_native_srli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
 {
     rvjit_loong_DJUk5_op(block, LOONGI_SRLI_W, hrds, hrs1, imm);
 }
 
-static inline void rvjit32_native_slli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
+static inline void rvjit32_native_slli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
 {
     rvjit_loong_DJUk5_op(block, LOONGI_SLLI_W, hrds, hrs1, imm);
 }
@@ -1356,7 +1356,7 @@ static inline void rvjit32_native_slti(rvjit_block_t *block, regid_t hrds, regid
     rvjit_loong_DJSk12_op(block, LOONGI_SLTI, hrds, hrs1, imm);
 }
 
-static inline void rvjit32_native_sltiu(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint32_t imm)
+static inline void rvjit32_native_sltiu(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_SLTUI, hrds, hrs1, imm);
 }
@@ -1637,17 +1637,17 @@ static inline void rvjit64_native_sllw(rvjit_block_t *block, regid_t hrds, regid
     rvjit_loong_DJK_op(block, LOONGI_SLL_W, hrds, hrs1, hrs2);
 }
 
-static inline void rvjit64_native_addi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int64_t imm)
+static inline void rvjit64_native_addi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_ADDI_D, hrds, hrs1, imm);
 }
 
-static inline void rvjit64_native_addiw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int64_t imm)
+static inline void rvjit64_native_addiw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_ADDI_W, hrds, hrs1, imm);
 }
 
-static inline void rvjit64_native_ori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint64_t imm)
+static inline void rvjit64_native_ori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     if (checku11(imm))
         rvjit_loong_DJUk12_op(block, LOONGI_ORI, hrds, hrs1, imm);
@@ -1661,7 +1661,7 @@ static inline void rvjit64_native_ori(rvjit_block_t *block, regid_t hrds, regid_
     }
 }
 
-static inline void rvjit64_native_andi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint64_t imm)
+static inline void rvjit64_native_andi(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     if (checku11(imm))
         rvjit_loong_DJUk12_op(block, LOONGI_ANDI, hrds, hrs1, imm);
@@ -1675,7 +1675,7 @@ static inline void rvjit64_native_andi(rvjit_block_t *block, regid_t hrds, regid
     }
 }
 
-static inline void rvjit64_native_xori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint64_t imm)
+static inline void rvjit64_native_xori(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     if (checku11(imm))
         rvjit_loong_DJUk12_op(block, LOONGI_XORI, hrds, hrs1, imm);
@@ -1689,42 +1689,42 @@ static inline void rvjit64_native_xori(rvjit_block_t *block, regid_t hrds, regid
     }
 }
 
-static inline void rvjit64_native_srli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint64_t imm)
+static inline void rvjit64_native_srli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
 {
     rvjit_loong_DJUk6_op(block, LOONGI_SRLI_D, hrds, hrs1, imm);
 }
 
-static inline void rvjit64_native_srliw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint64_t imm)
+static inline void rvjit64_native_srliw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
 {
     rvjit_loong_DJUk5_op(block, LOONGI_SRLI_W, hrds, hrs1, imm);
 }
 
-static inline void rvjit64_native_srai(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint64_t imm)
+static inline void rvjit64_native_srai(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
 {
     rvjit_loong_DJUk6_op(block, LOONGI_SRAI_D, hrds, hrs1, imm);
 }
 
-static inline void rvjit64_native_sraiw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint64_t imm)
+static inline void rvjit64_native_sraiw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
 {
     rvjit_loong_DJUk5_op(block, LOONGI_SRAI_W, hrds, hrs1, imm);
 }
 
-static inline void rvjit64_native_slli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint64_t imm)
+static inline void rvjit64_native_slli(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
 {
     rvjit_loong_DJUk6_op(block, LOONGI_SLLI_D, hrds, hrs1, imm);
 }
 
-static inline void rvjit64_native_slliw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint64_t imm)
+static inline void rvjit64_native_slliw(rvjit_block_t *block, regid_t hrds, regid_t hrs1, uint8_t imm)
 {
     rvjit_loong_DJUk5_op(block, LOONGI_SLLI_W, hrds, hrs1, imm);
 }
 
-static inline void rvjit64_native_slti(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int64_t imm)
+static inline void rvjit64_native_slti(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_SLTI, hrds, hrs1, imm);
 }
 
-static inline void rvjit64_native_sltiu(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int64_t imm)
+static inline void rvjit64_native_sltiu(rvjit_block_t *block, regid_t hrds, regid_t hrs1, int32_t imm)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_SLTUI, hrds, hrs1, imm);
 }
@@ -1739,57 +1739,57 @@ static inline void rvjit64_native_sltu(rvjit_block_t *block, regid_t hrds, regid
     rvjit_loong_DJK_op(block, LOONGI_SLTU, hrds, hrs1, hrs2);
 }
 
-static inline void rvjit64_native_lb(rvjit_block_t *block, regid_t dest, regid_t base, int64_t offset)
+static inline void rvjit64_native_lb(rvjit_block_t *block, regid_t dest, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_LD_B, dest, base, offset);
 }
 
-static inline void rvjit64_native_lbu(rvjit_block_t *block, regid_t dest, regid_t base, int64_t offset)
+static inline void rvjit64_native_lbu(rvjit_block_t *block, regid_t dest, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_LD_BU, dest, base, offset);
 }
 
-static inline void rvjit64_native_lh(rvjit_block_t *block, regid_t dest, regid_t base, int64_t offset)
+static inline void rvjit64_native_lh(rvjit_block_t *block, regid_t dest, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_LD_H, dest, base, offset);
 }
 
-static inline void rvjit64_native_lhu(rvjit_block_t *block, regid_t dest, regid_t base, int64_t offset)
+static inline void rvjit64_native_lhu(rvjit_block_t *block, regid_t dest, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_LD_HU, dest, base, offset);
 }
 
-static inline void rvjit64_native_lw(rvjit_block_t *block, regid_t dest, regid_t base, int64_t offset)
+static inline void rvjit64_native_lw(rvjit_block_t *block, regid_t dest, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_LD_W, dest, base, offset);
 }
 
-static inline void rvjit64_native_lwu(rvjit_block_t *block, regid_t dest, regid_t base, int64_t offset)
+static inline void rvjit64_native_lwu(rvjit_block_t *block, regid_t dest, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_LD_WU, dest, base, offset);
 }
 
-static inline void rvjit64_native_ld(rvjit_block_t *block, regid_t dest, regid_t base, int64_t offset)
+static inline void rvjit64_native_ld(rvjit_block_t *block, regid_t dest, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_LD_D, dest, base, offset);
 }
 
-static inline void rvjit64_native_sb(rvjit_block_t *block, regid_t src, regid_t base, int64_t offset)
+static inline void rvjit64_native_sb(rvjit_block_t *block, regid_t src, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_ST_B, src, base, offset);
 }
 
-static inline void rvjit64_native_sh(rvjit_block_t *block, regid_t src, regid_t base, int64_t offset)
+static inline void rvjit64_native_sh(rvjit_block_t *block, regid_t src, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_ST_H, src, base, offset);
 }
 
-static inline void rvjit64_native_sw(rvjit_block_t *block, regid_t src, regid_t base, int64_t offset)
+static inline void rvjit64_native_sw(rvjit_block_t *block, regid_t src, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_ST_W, src, base, offset);
 }
 
-static inline void rvjit64_native_sd(rvjit_block_t *block, regid_t src, regid_t base, int64_t offset)
+static inline void rvjit64_native_sd(rvjit_block_t *block, regid_t src, regid_t base, int32_t offset)
 {
     rvjit_loong_DJSk12_op(block, LOONGI_ST_D, src, base, offset);
 }
