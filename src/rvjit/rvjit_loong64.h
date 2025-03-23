@@ -1117,7 +1117,7 @@ static inline branch_t rvjit_native_jmp(rvjit_block_t* block, branch_t handle, b
             return block->size;
         } else {
             // Forward jump: Patch jump offset
-            rvjit_loong_Sd10k16_reloc_offset(LOONGI_B, block->code + handle, block->size - handle);
+            rvjit_loong_branch_patch_offset(block->code + handle, block->size - handle);
             return BRANCH_NEW;
         }
     } else {
@@ -1153,8 +1153,8 @@ static branch_t rvjit_loong_condbranch_target(rvjit_block_t* block, branch_t han
     if (handle == BRANCH_NEW) {
         return block->size;
     } else {
-        // Patch to jump
-        rvjit_loong_branch_patch_offset(block->code + handle, block->size - handle);
+        // Patch jump offset
+        rvjit_loong_condbranch_patch_offset(block->code + handle, block->size - handle);
         return BRANCH_NEW;
     }
 }
